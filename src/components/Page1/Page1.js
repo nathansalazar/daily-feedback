@@ -14,7 +14,6 @@ class Page1 extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.dispatch({type: 'FEELING', payload: this.state.feeling});
-        console.log(this.state.feeling);
     }
 
     render() {
@@ -22,7 +21,7 @@ class Page1 extends Component {
             <div>How are you feeling today?</div>
             <form onSubmit={this.handleSubmit}>
                 <input type="number" onChange={this.handleChange} />
-                <input type="button" value="Next" />
+                <input type="button" value="Next" onClick={this.handleSubmit} />
             </form>
         </div>);
     }

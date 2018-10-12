@@ -7,17 +7,27 @@ import logger from 'redux-logger';
 
 
 
-const feeling = (state='', action) => {
+const feedback = (state = {}, action) => {
     switch (action.type) {
         case 'FEELING':
-            return action.payload;
+            state.feeling = action.payload;
+            return state;
+        case 'UNDERSTANDING':
+            state.understanding = action.payload;
+            return state;
+        case 'SUPPORTED':
+            state.supported = action.payload;
+            return state;
+        case 'COMMENTS':
+            state.comments = action.payload;
+            return state;
         default:
             return state;
     }
 }
 
-const allReducers = combineReducers({feeling});
+const allReducers = combineReducers({ feedback });
 
-const storeInstance = createStore( allReducers, applyMiddleware(logger));
+const storeInstance = createStore(allReducers, applyMiddleware(logger));
 
 ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, document.getElementById('root'));
