@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 class Page3 extends Component {
 
     state={
-        supported: 0
+        supported: 0,
+        goToNext: false
     }
 
     handleChange = (event) => {
@@ -14,9 +16,14 @@ class Page3 extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.dispatch({type: 'SUPPORTED', payload: this.state.supported});
+        this.setState({goToNext: true});
     }
 
     render() {
+        if(this.state.goToNext){
+            return <Redirect to='/page4' />;
+        }
+
         return (<div>
             <div>How well are you being supported?</div>
             <form onSubmit={this.handleSubmit}>

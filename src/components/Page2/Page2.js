@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 class Page2 extends Component {
 
     state={
-        understanding: 0
+        understanding: 0,
+        goToNext: false
     }
 
     handleChange = (event) => {
@@ -14,9 +16,14 @@ class Page2 extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.dispatch({type: 'UNDERSTANDING', payload: this.state.understanding});
+        this.setState({goToNext: true});
     }
 
     render() {
+        if(this.state.goToNext){
+            return <Redirect to='/page3' />;
+        }
+
         return (<div>
             <div>How well are you understanding the content?</div>
             <form onSubmit={this.handleSubmit}>

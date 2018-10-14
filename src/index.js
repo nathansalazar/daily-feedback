@@ -21,6 +21,8 @@ const feedback = (state = {}, action) => {
         case 'COMMENTS':
             state.comments = action.payload;
             return state;
+        case 'EMPTY':
+            return {};
         default:
             return state;
     }

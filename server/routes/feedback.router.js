@@ -15,4 +15,22 @@ router.post('/',(req,res)=>{
             })
 })
 
+router.get('/',(req,res)=>{
+    pool.query(`SELECT * FROM "feedback";`).then((results)=>{
+        res.send(results.rows);
+    }).catch((error)=>{
+        console.log('Error in GET:',error);
+    })
+})
+
+router.delete('/:id',(req,res)=>{
+    console.log(req.params.id);
+    pool.query(`DELETE FROM "feedback" 
+    WHERE "id"=$1`,[req.params.id]).then((results)=>{
+        res.send(results.rows);
+    }).catch((error)=>{
+        console.log('Error in DELETE:',error);
+    })
+})
+
 module.exports = router;

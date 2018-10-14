@@ -1,24 +1,40 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
 import './App.css';
 import {HashRouter as Router, Route, Link } from 'react-router-dom';
-import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
+import ProgressBar from '../ProgressBar/ProgressBar';
 import Page1 from '../Page1/Page1';
 import Page2 from '../Page2/Page2';
 import Page3 from '../Page3/Page3';
 import Page4 from '../Page4/Page4';
 import Submitted from '../Submitted/Submitted';
+import Admin from '../Admin/Admin';
 
 class App extends Component {
+
+  state={
+    goToNext: false
+  }
+
+  handleClick=()=>{
+    this.setState({goToNext: true});
+  }
+
   render() {
+    // if(this.state.goToNext){
+    //   return <Redirect to="/page1" />
+    // }
+
     return (
       <Router>
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Feedback!</h1>
           <h4><i>Don't forget it!</i></h4>
+          <ProgressBar />
         </header>
-        <ul>
+        {this.state.goToNext && <button>Click to Begin</button>}
+        {/* <ul>
           <li>
             <Link to="/page1" >Page 1</Link>
           </li>
@@ -34,17 +50,19 @@ class App extends Component {
           <li>
             <Link to="/submitted" >Submitted</Link>
           </li>
-        </ul>
+        </ul> */}
         <br/>
         <Route exact path="/page1" component={Page1} />
         <Route exact path="/page2" component={Page2} />
         <Route exact path="/page3" component={Page3} />
         <Route exact path="/page4" component={Page4} />
         <Route exact path="/submitted" component={Submitted} />
+        <Route exact path="/admin" component={Admin} />
       </div>
       </Router>
     );
   }
 }
+
 
 export default App;

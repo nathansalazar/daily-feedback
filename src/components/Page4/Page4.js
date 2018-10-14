@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import {Redirect} from 'react-router-dom';
 
 class Page4 extends Component {
 
     state={
-        comments: ''
+        comments: '',
+        goToNext: false
     }
 
     handleChange = (event) => {
@@ -17,12 +19,18 @@ class Page4 extends Component {
         this.props.dispatch({type: 'COMMENTS', payload: this.state.comments});
         axios.post('/admin/feedback', this.props.feedback).then((response) => {
             console.log('POST response:', response);
+            this.props.dispatch({type: 'EMPTY'});
         }).catch((error) => {
             console.log('Error in POST:', error);
         })
+        this.setState({goToNext: true});
     }
 
     render() {
+        if(this.state.goToNext){
+            return <Redirect to='/submitted' />;
+        }
+
         return (<div>
             <div>Any comments you would like to leave?</div>
             <form onSubmit={this.handleSubmit}>

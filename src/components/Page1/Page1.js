@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 class Page1 extends Component {
 
     state={
-        feeling: 0
+        feeling: 0,
+        goToNext: false
     }
 
     handleChange = (event) => {
@@ -14,9 +16,14 @@ class Page1 extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.dispatch({type: 'FEELING', payload: this.state.feeling});
+        this.setState({goToNext: true});
     }
 
     render() {
+        if(this.state.goToNext){
+            return <Redirect to='/page2' />;
+        }
+
         return (<div>
             <div>How are you feeling today?</div>
             <form onSubmit={this.handleSubmit}>
