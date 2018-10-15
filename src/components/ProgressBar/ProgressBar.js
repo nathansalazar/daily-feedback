@@ -3,18 +3,18 @@ import {connect} from 'react-redux';
 
 class ProgressBar extends Component{
 
+
     render(){
-        return (<div className="progressBarContainer">
-        <div className="progressBar" style={{width: `${Object.keys(this.props.reduxStore).length/.04}`}}></div>
-        <pre>
-        {JSON.stringify(this.props.reduxStore)}
-        {JSON.stringify(Object.keys(this.props.reduxStore.feedback))}</pre>
+        return (<div>
+          <div className="progressBarContainer">
+        <div className="progressBar" style={{width: `${100*Object.keys(this.props.feedback).length/4}%`}}></div>
+      </div>
       </div>);
     }
 }
 
-const mapReduxStoreToProps = (reduxStore) => {
-    return {reduxStore}
+const mapReduxStoreToProps = (reduxState) => {
+    return {feedback: reduxState.feedback}
   }
 
 export default connect(mapReduxStoreToProps)(ProgressBar);

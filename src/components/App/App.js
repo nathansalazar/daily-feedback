@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {HashRouter as Router, Route, Link } from 'react-router-dom';
-import {Redirect} from 'react-router-dom';
+import {HashRouter as Router, Route } from 'react-router-dom';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import Page1 from '../Page1/Page1';
 import Page2 from '../Page2/Page2';
@@ -13,17 +12,15 @@ import Admin from '../Admin/Admin';
 class App extends Component {
 
   state={
-    goToNext: false
+    goToPage1: false,
+    showButton: true
   }
 
   handleClick=()=>{
-    this.setState({goToNext: true});
+    this.setState({goToPage1: true, showButton: false});
   }
 
   render() {
-    // if(this.state.goToNext){
-    //   return <Redirect to="/page1" />
-    // }
 
     return (
       <Router>
@@ -33,26 +30,8 @@ class App extends Component {
           <h4><i>Don't forget it!</i></h4>
           <ProgressBar />
         </header>
-        {this.state.goToNext && <button>Click to Begin</button>}
-        {/* <ul>
-          <li>
-            <Link to="/page1" >Page 1</Link>
-          </li>
-          <li>
-            <Link to="/page2" >Page 2</Link>
-          </li>
-          <li>
-            <Link to="/page3" >Page 3</Link>
-          </li>
-          <li>
-            <Link to="/page4" >Page 4</Link>
-          </li>
-          <li>
-            <Link to="/submitted" >Submitted</Link>
-          </li>
-        </ul> */}
+        <Page1 />
         <br/>
-        <Route exact path="/page1" component={Page1} />
         <Route exact path="/page2" component={Page2} />
         <Route exact path="/page3" component={Page3} />
         <Route exact path="/page4" component={Page4} />

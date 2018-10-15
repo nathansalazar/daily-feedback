@@ -9,7 +9,7 @@ router.post('/',(req,res)=>{
         VALUES ($1,$2,$3,$4);`,
         [req.body.feeling, req.body.understanding, req.body.supported, 
             req.body.comments]).then((results) => {
-                console.log('results',results);
+                res.sendStatus(201);
             }).catch((error)=>{
                 console.log('Error in POST:',error);
             })
@@ -24,7 +24,6 @@ router.get('/',(req,res)=>{
 })
 
 router.delete('/:id',(req,res)=>{
-    console.log(req.params.id);
     pool.query(`DELETE FROM "feedback" 
     WHERE "id"=$1`,[req.params.id]).then((results)=>{
         res.send(results.rows);

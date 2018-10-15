@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom';
 
 class Page4 extends Component {
 
@@ -17,19 +16,16 @@ class Page4 extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.dispatch({type: 'COMMENTS', payload: this.state.comments});
+        this.setState({goToNext: true});
         axios.post('/admin/feedback', this.props.feedback).then((response) => {
+            //for some reason this is not sending the comments part of the feedback
             console.log('POST response:', response);
-            this.props.dispatch({type: 'EMPTY'});
         }).catch((error) => {
             console.log('Error in POST:', error);
-        })
-        this.setState({goToNext: true});
+        }) 
     }
 
     render() {
-        if(this.state.goToNext){
-            return <Redirect to='/submitted' />;
-        }
 
         return (<div>
             <div>Any comments you would like to leave?</div>
@@ -37,6 +33,8 @@ class Page4 extends Component {
                 <input type="text" onChange={this.handleChange} />
                 <input type="button" value="Submit" onClick={this.handleSubmit} />
             </form>
+            {JSON.stringify(this.props.feedback)} 
+            {/* this can be taken out */}
         </div>);
     }
 }

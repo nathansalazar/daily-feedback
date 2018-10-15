@@ -12,7 +12,9 @@ class Admin extends Component{
     getFeedback = () => {
         axios.get('/admin/feedback').then((response)=>{
             console.log('GET response:',response.data);
-            this.setState({feedback: response.data});
+            //we sort the array so that the most recent feedback is on top,
+            //then store it in local state
+            this.setState({feedback: response.data.sort((a,b) => {return b.id-a.id})});
         }).then((error) => {
             console.log('Error in GET:', error);
         })

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 class Submitted extends Component{
 
@@ -9,12 +10,13 @@ class Submitted extends Component{
 
     handleClick = () => {
         this.setState({goToBeginning: true});
+        this.props.dispatch({type: 'EMPTY'});
     }
 
     render(){
 
         if(this.state.goToBeginning){
-            return <Redirect to="/page1" />
+            return <Redirect to="/" />
         }
 
         return (<div>
@@ -25,4 +27,4 @@ class Submitted extends Component{
     }
 }
 
-export default Submitted;
+export default connect()(Submitted);

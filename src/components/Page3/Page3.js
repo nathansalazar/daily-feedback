@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 
 class Page3 extends Component {
 
@@ -20,14 +19,11 @@ class Page3 extends Component {
     }
 
     render() {
-        if(this.state.goToNext){
-            return <Redirect to='/page4' />;
-        }
 
         return (<div>
             <div>How well are you being supported?</div>
             <form onSubmit={this.handleSubmit}>
-                <input type="number" onChange={this.handleChange} />
+                <input type="number" onChange={this.handleChange} placeholder="1-10" />
                 <input type="button" value="Next" onClick={this.handleSubmit} />
             </form>
         </div>);
