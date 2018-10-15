@@ -5,7 +5,6 @@ class Page3 extends Component {
 
     state={
         supported: 0,
-        goToNext: false
     }
 
     handleChange = (event) => {
@@ -15,7 +14,6 @@ class Page3 extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.dispatch({type: 'SUPPORTED', payload: this.state.supported});
-        this.setState({goToNext: true});
     }
 
     render() {

@@ -5,7 +5,6 @@ class Page2 extends Component {
 
     state={
         understanding: 0,
-        goToNext: false
     }
 
     handleChange = (event) => {
@@ -15,7 +14,6 @@ class Page2 extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.dispatch({type: 'UNDERSTANDING', payload: this.state.understanding});
-        this.setState({goToNext: true});
     }
 
     render() {

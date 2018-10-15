@@ -6,7 +6,6 @@ class Page4 extends Component {
 
     state={
         comments: '',
-        goToNext: false
     }
 
     handleChange = (event) => {
@@ -16,7 +15,6 @@ class Page4 extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.dispatch({type: 'COMMENTS', payload: this.state.comments});
-        this.setState({goToNext: true});
         axios.post('/admin/feedback', this.props.feedback).then((response) => {
             //for some reason this is not sending the comments part of the feedback
             console.log('POST response:', response);
