@@ -12,11 +12,11 @@ class Page4 extends Component {
         this.setState({comments: event.target.value});
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = async event => {
+        //we add async await so that the Redux state updates BEFORE the post
         event.preventDefault();
-        this.props.dispatch({type: 'COMMENTS', payload: this.state.comments});
+        await this.props.dispatch({type: 'COMMENTS', payload: this.state.comments});
         axios.post('/admin/feedback', this.props.feedback).then((response) => {
-            //for some reason this is not sending the comments part of the feedback
             console.log('POST response:', response);
         }).catch((error) => {
             console.log('Error in POST:', error);
@@ -31,8 +31,6 @@ class Page4 extends Component {
                 <input type="text" onChange={this.handleChange} />
                 <input type="button" value="Submit" onClick={this.handleSubmit} />
             </form>
-            {JSON.stringify(this.props.feedback)} 
-            {/* this can be taken out */}
         </div>);
     }
 }
